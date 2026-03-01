@@ -55,13 +55,58 @@
       border-bottom: 1px solid var(--line);
     }
 
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
     .policy-kicker {
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--brand);
       font-size: 0.73rem;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 0;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      gap: 4px;
+      padding: 3px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-family: "Manrope", sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 140ms ease, background-color 140ms ease;
+    }
+
+    .lang-btn:hover {
+      color: var(--text-main);
+    }
+
+    .lang-btn:focus-visible {
+      outline: 2px solid var(--brand-soft);
+      outline-offset: 2px;
+    }
+
+    .lang-btn.is-active {
+      background: var(--brand);
+      color: #ffffff;
     }
 
     .policy-title {
@@ -151,32 +196,138 @@
 <body>
   <main class="policy" role="main">
     <header class="policy-header">
-      <p class="policy-kicker">Farlands Saga</p>
-      <h1 class="policy-title">Privacy Policy</h1>
-      <p class="policy-subtitle">How player data is handled in the game</p>
+      <div class="header-top">
+        <p class="policy-kicker">Farlands Saga</p>
+        <div class="lang-switch" role="group" aria-label="Language switch">
+          <button class="lang-btn" type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+          <button class="lang-btn" type="button" data-lang-btn="tr" aria-pressed="false">TR</button>
+        </div>
+      </div>
+      <h1 class="policy-title" data-i18n="title">Privacy Policy</h1>
+      <p class="policy-subtitle" data-i18n="subtitle">How player data is handled in the game</p>
     </header>
 
-    <section class="policy-content" aria-label="Policy Details">
-      <p>Farlands Saga does not collect, store, or share any personal information from users.</p>
+    <section class="policy-content" aria-label="Policy Details" data-i18n-aria-label="policyAria">
+      <p data-i18n="body1">Farlands Saga does not collect, store, or share any personal information from users.</p>
 
-      <p>The game does not require account registration, email address, phone number, or any personally identifiable information to play.</p>
+      <p data-i18n="body2">The game does not require account registration, email address, phone number, or any personally identifiable information to play.</p>
 
-      <p>Any nickname entered by the user is stored locally on the user's device and is not transmitted to any server.</p>
+      <p data-i18n="body3">Any nickname entered by the user is stored locally on the user's device and is not transmitted to any server.</p>
 
-      <p>The app may use standard platform services provided by Apple (such as crash reporting or analytics tools) which may collect anonymous usage data in accordance with Apple's privacy policies.</p>
+      <p data-i18n="body4">The app may use standard platform services provided by Apple (such as crash reporting or analytics tools) which may collect anonymous usage data in accordance with Apple's privacy policies.</p>
 
-      <p>We do not sell, rent, or share user data with third parties.</p>
+      <p data-i18n="body5">We do not sell, rent, or share user data with third parties.</p>
 
       <div class="contact-box">
-        <p><strong>Contact</strong></p>
-        <p>If you have any questions regarding this Privacy Policy, you may contact us at <a href="mailto:mertkaan255@gmail.com">mertkaan255@gmail.com</a>.</p>
+        <p><strong data-i18n="contactHeading">Contact</strong></p>
+        <p><span data-i18n="contactIntro">If you have any questions regarding this Privacy Policy, you may contact us at</span> <a href="mailto:mertkaan255@gmail.com">mertkaan255@gmail.com</a>.</p>
       </div>
 
       <div class="meta">
-        <p><strong>Terms of Use (EULA):</strong> <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
-        <p><strong>Last updated:</strong> March 2026</p>
+        <p><strong data-i18n="termsLabel">Terms of Use (EULA):</strong> <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
+        <p><strong data-i18n="lastUpdatedLabel">Last updated:</strong> <span data-i18n="lastUpdatedValue">March 2026</span></p>
       </div>
     </section>
   </main>
+  <script>
+    (() => {
+      const STORAGE_KEY = "farlands-policy-lang";
+      const fallbackLang = "en";
+      const translations = {
+        en: {
+          documentTitle: "Farlands Saga - Privacy Policy",
+          title: "Privacy Policy",
+          subtitle: "How player data is handled in the game",
+          policyAria: "Policy Details",
+          body1: "Farlands Saga does not collect, store, or share any personal information from users.",
+          body2: "The game does not require account registration, email address, phone number, or any personally identifiable information to play.",
+          body3: "Any nickname entered by the user is stored locally on the user's device and is not transmitted to any server.",
+          body4: "The app may use standard platform services provided by Apple (such as crash reporting or analytics tools) which may collect anonymous usage data in accordance with Apple's privacy policies.",
+          body5: "We do not sell, rent, or share user data with third parties.",
+          contactHeading: "Contact",
+          contactIntro: "If you have any questions regarding this Privacy Policy, you may contact us at",
+          termsLabel: "Terms of Use (EULA):",
+          lastUpdatedLabel: "Last updated:",
+          lastUpdatedValue: "March 2026"
+        },
+        tr: {
+          documentTitle: "Farlands Saga - Gizlilik Politikasi",
+          title: "Gizlilik Politikasi",
+          subtitle: "Oyuncu verilerinin oyunda nasil islendigi",
+          policyAria: "Politika Detaylari",
+          body1: "Farlands Saga, kullanicilardan herhangi bir kisisel bilgi toplamaz, saklamaz veya paylasmaz.",
+          body2: "Oyun, oynanabilmesi icin hesap kaydi, e-posta adresi, telefon numarasi veya kimligi belirleyebilecek herhangi bir bilgi gerektirmez.",
+          body3: "Kullanici tarafindan girilen takma ad, kullanicinin cihazinda yerel olarak saklanir ve herhangi bir sunucuya aktarilmaz.",
+          body4: "Uygulama, Apple tarafindan saglanan standart platform hizmetlerini (ornegin cokme raporlari veya analiz araclari) kullanabilir; bu hizmetler Apple'in gizlilik politikalarina uygun olarak anonim kullanim verileri toplayabilir.",
+          body5: "Kullanici verilerini ucuncu taraflara satmayiz, kiralamayiz veya paylasmayiz.",
+          contactHeading: "Iletisim",
+          contactIntro: "Bu Gizlilik Politikasi ile ilgili sorulariniz icin bize su adresten ulasabilirsiniz",
+          termsLabel: "Kullanim Kosullari (EULA):",
+          lastUpdatedLabel: "Son guncelleme:",
+          lastUpdatedValue: "Mart 2026"
+        }
+      };
+
+      const textNodes = document.querySelectorAll("[data-i18n]");
+      const ariaNodes = document.querySelectorAll("[data-i18n-aria-label]");
+      const langButtons = document.querySelectorAll("[data-lang-btn]");
+
+      function detectInitialLanguage() {
+        const savedLanguage = localStorage.getItem(STORAGE_KEY);
+        if (savedLanguage && translations[savedLanguage]) {
+          return savedLanguage;
+        }
+
+        const browserLanguage = (navigator.language || "").toLowerCase();
+        if (browserLanguage.startsWith("tr")) {
+          return "tr";
+        }
+
+        return fallbackLang;
+      }
+
+      function applyLanguage(language) {
+        const currentLanguage = translations[language] ? language : fallbackLang;
+        const dictionary = translations[currentLanguage];
+
+        textNodes.forEach((node) => {
+          const key = node.getAttribute("data-i18n");
+          if (key && dictionary[key]) {
+            node.textContent = dictionary[key];
+          }
+        });
+
+        ariaNodes.forEach((node) => {
+          const key = node.getAttribute("data-i18n-aria-label");
+          if (key && dictionary[key]) {
+            node.setAttribute("aria-label", dictionary[key]);
+          }
+        });
+
+        langButtons.forEach((button) => {
+          const isActive = button.getAttribute("data-lang-btn") === currentLanguage;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+
+        document.documentElement.lang = currentLanguage;
+        document.title = dictionary.documentTitle;
+      }
+
+      langButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selectedLanguage = button.getAttribute("data-lang-btn");
+          if (!selectedLanguage || !translations[selectedLanguage]) {
+            return;
+          }
+
+          localStorage.setItem(STORAGE_KEY, selectedLanguage);
+          applyLanguage(selectedLanguage);
+        });
+      });
+
+      applyLanguage(detectInitialLanguage());
+    })();
+  </script>
 </body>
 </html>
